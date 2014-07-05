@@ -1,0 +1,18 @@
+
+<?php
+ if (empty($userSession)): ?>
+  <form class="form-signin" role="form" method="post" action="/admin/login">
+    <h2 class="form-signin-heading">Ingrese su usuario</h2>
+    <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+    <input type="password" name="password" class="form-control" placeholder="Password" required>
+    <label class="checkbox">
+      <input type="checkbox" name="rememberme" value="remember-me"> Recordar Contraseña
+    </label>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+  </form>
+<?php else: ?>
+
+    <h1>ADMIN PANEL</h1>
+    <a href="/admin/logout">Desconectarse</a>
+
+<?php endif; ?>

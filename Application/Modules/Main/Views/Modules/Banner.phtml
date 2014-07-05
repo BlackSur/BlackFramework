@@ -1,0 +1,40 @@
+<?php
+$fileEntity = \Black\Entity\Manager::getEntity('File');
+$model = new \Black\Entity\Model();
+$model->setEntity($fileEntity);
+$entityData = $model->getById($module->parameters);
+
+switch ($entityData->type) {
+    case 'image':
+        $resource = "<img src='{$entityData->path}' alt='' width='600' />";
+        break;
+    case 'flash':
+        $resource = "<object
+          type='application/x-shockwave-flash'
+          data='{$entityData->path}'
+          id='swf'
+          width='600'
+          height='600'
+          style='visibility: visible;'>
+        </object>";
+        break;
+    default:
+        $resource = "<a href='{$entityData->path}'>{$entityData->title}</a>";
+        break;
+
+}
+
+if (!empty($entityData->path)):
+    echo <<<HTML
+      <div class='banner {$placeHolder}'>
+        {$resource}
+      </div>
+
+<style type='text/css'>
+  @import url('/Assets/css/banners/banners.css');
+</style>
+HTML;
+endif;
+
+
+

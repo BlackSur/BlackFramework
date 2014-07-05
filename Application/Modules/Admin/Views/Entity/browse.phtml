@@ -1,0 +1,44 @@
+<?php
+$buttonCreateNewItemMessage = '';
+switch ($entity->name) {
+    case 'News':
+      $buttonCreateNewItemMessage = 'Crear una Noticia';
+      break;
+    default:
+      $buttonCreateNewItemMessage = "Crear nueva {$entity->name}";
+      break;
+}
+?>
+<a href="/admin/entity/create/<?php echo $entity->name; ?>" class="btn btn-primary btn-lg active bt-marg-top" role="button">
+<?php echo $buttonCreateNewItemMessage; ?>
+</a>
+
+
+<br><br>
+
+<table class="table table-condensed">
+      <thead>
+        <tr>
+        <th>ID</th>
+<?php foreach($data->header as $columnName => $column) {
+  echo "<th>{$column->name}</th>";
+}
+?>
+          <th>Editar</th>
+          <th>Borrar</th>
+        </tr>
+      </thead>
+      <tbody>
+<?php foreach($data->data as $key => $value) {
+  echo "<tr>";
+  echo "<td class='entityId'>" . $value->id . "</td>";
+  foreach($data->header as $columnName => $column) {
+    echo "<td>" . $value->{$columnName} . "</td>";
+  }
+    echo "<td><a href='/admin/entity/edit/{$entity->name}/{$value->id}'>Edit</a></td>";
+    echo "<td><a href='/admin/entity/delete/{$entity->name}/{$value->id}' aria-action='delete'>Delete</a></td>";
+  echo "</tr>";
+}
+?>
+      </tbody>
+    </table>

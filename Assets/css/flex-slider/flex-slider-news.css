@@ -1,0 +1,30 @@
+
+#homepage-news.flexslider {
+}
+
+#homepage-news .flex-caption {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+
+#homepage-news.flexslider.mainArticle img {
+    display: block;
+    max-height:400px;
+    margin: 0 auto;
+    width: auto;
+    height: auto;
+}
+
+.flex-caption a {
+    color: #fff;
+}
+.flex-caption a:hover {
+    color: #fff;
+}

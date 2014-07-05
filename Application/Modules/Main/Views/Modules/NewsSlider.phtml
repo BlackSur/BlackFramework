@@ -1,0 +1,48 @@
+<?php
+
+//$moduleEntity = new \Black\Entity\Decorator($module);
+$newsEntity = \Black\Entity\Manager::getEntity('News');
+$newsModel = new \Application\Modules\Main\Models\News();
+
+$articles = $newsModel->getForPlaceHolder($module->parameters);
+
+
+if (!empty($articles)):
+    //echo "<h3>{$gallery->title}</h3>";
+
+    echo "<div id='homepage-news' class='flexslider {$placeHolder}'>
+            <ul class='slides'>";
+foreach ($articles as $k => $v):
+    echo "<li>
+      <img src='{$v->image}' alt='' width='700' />
+
+      <p class='flex-caption'><a href='/article/{$v->id}'>{$v->title}</a></p>
+    </li>";
+
+endforeach;
+    echo <<<HTML
+    </ul>
+</div>
+
+<style type='text/css'>
+  @import url('/Assets/css/flex-slider/flex-slider.css');
+  @import url('/Assets/css/flex-slider/flex-slider-news.css');
+</style>
+<script defer src="/Assets/js/flex-slider/jquery.flexslider-min.js"></script>
+
+  <script type="text/javascript">
+
+    $(window).load(function(){
+      $('.flexslider').flexslider({
+        animation: "slide",
+        controlNav: false,
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+    });
+  </script>
+
+
+HTML;
+endif;

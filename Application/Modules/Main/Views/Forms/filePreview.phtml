@@ -1,0 +1,33 @@
+<?php
+$type = 'file';
+$imageExtensions = array('.png', '.jpg', '.gif');
+foreach($imageExtensions as $string) {
+  if(strpos($elementValue, $string) !== false) {
+    $type = 'image';
+    break;
+  }
+}
+
+switch ($type) {
+    case 'image':
+        $html = <<<HTML
+<div class="form-group" style="height: 250px; overflow: hidden;">
+    <label for="{$elementId}">{$labelText}</label>
+    <input
+        type="{$elementType}"
+        name="{$elementName}"
+        class="form-control {$elementClass}"
+        id="{$elementId}"
+        placeholder="{$elementPlaceHolder}"
+        value="{$elementValue}"
+    ><br>
+    <img src="{$elementValue}" alt="" style="max-height: 160px;"/>
+</div>
+HTML;
+        break;
+    case 'file':
+        break;
+}
+
+
+return $html;
