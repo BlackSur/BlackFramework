@@ -1,0 +1,41 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.side-nav {
+margin-left: -225px;
+left: 225px;
+width: 230px;
+position: fixed;
+top: 50px;
+height: 100%;
+border-radius: 0;
+border: none;
+background-color: #222222;
+overflow-y: auto;
+}
+.selected {
+border-left: 7px solid #2A9FD6;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus {
+  background-color: #080808!important;
+}
+
+
+.nav > li > a:hover, .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #080808;
+  width: 230px;
+  color: #BDBDBD;
+
+}
+.side-nav>li>a {
+  width: 155px;
+  color:#fff;
+}
+.bt-marg-top {
+  margin-top: 22px;
+}

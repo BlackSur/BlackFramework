@@ -1,0 +1,68 @@
+<?php
+if (!empty($formEnctype)) {
+    $formEnctype = "enctype='{$formEnctype}'";
+    //$formId = empty($formId) ? 'upload' : $formId;
+    //$formAction = empty($formAction) ? '/admin/upload/others' : $formAction;
+} else {
+    $formEnctype = '';
+}
+
+$html = <<<HTML
+<form
+  data-form="blackForm"
+  role="form"
+  action="{$formAction}"
+  method="{$formMethod}"
+  class="{$formClass}"
+  id="{$formId}"
+  {$formEnctype}
+  >
+
+  {$content}
+
+</form>
+
+
+HTML;
+
+if (!empty($includeAjaxJS)):
+  foreach ($includeAjaxJS as $ajaxPack):
+if ($ajaxPack === 'ajaxFileUpload') {
+    $html .= <<<HTML
+
+<script src="/Assets/js/jquery.knob.js"></script>
+
+<!-- jQuery File Upload Dependencies -->
+<script src="/Assets/js/jquery.ui.widget.js"></script>
+<script src="/Assets/js/load-image.min.js"></script>
+<script src="/Assets/js/canvas-to-blob.min.js"></script>
+
+<script src="/Assets/js/jquery.iframe-transport.js"></script>
+<script src="/Assets/js/jquery.fileupload.js"></script>
+<script src="/Assets/js/jquery.fileupload-process.js"></script>
+<script src="/Assets/js/jquery.fileupload-image.js"></script>
+
+<!-- Our main JS file -->
+<script>
+    var ajaxUrl = "{$ajaxUrl}";
+</script>
+<script src="/Assets/js/ajaxUploadScript.js"></script>
+
+
+
+
+HTML;
+}
+
+endforeach;
+endif;
+
+$html .= <<<HTML
+
+<script src="/Assets/js/forms/blackForm.js"></script>
+<script>
+  $('form[data-form="blackForm"]').blackForm({'foo': 'bar'});
+</script>
+HTML;
+
+return $html;

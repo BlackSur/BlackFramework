@@ -1,0 +1,22 @@
+.banner {
+
+}
+
+.banner img {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+}
+
+.banner object {
+    display: block;
+    max-width:400px;
+    max-height:400px;
+    width: auto;
+    height: auto;
+}
+
+/** Fixes, by placeholders */
+.banner.beforeColumns {
+    margin: 20px 0 0 0;
+}

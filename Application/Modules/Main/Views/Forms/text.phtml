@@ -1,0 +1,18 @@
+<?php
+
+$html = <<<HTML
+<div class="form-group">
+    <label for="{$elementId}">{$labelText}</label>
+    <input
+        type="{$elementType}"
+        name="{$elementName}"
+        class="form-control {$elementClass}"
+        id="{$elementId}"
+        placeholder="{$elementPlaceHolder}"
+        value="{$elementValue}"
+    >
+</div>
+
+HTML;
+
+return $html;

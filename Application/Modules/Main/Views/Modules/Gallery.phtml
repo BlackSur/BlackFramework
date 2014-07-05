@@ -1,0 +1,48 @@
+<?php
+
+$entity = new \Black\Entity\Decorator($module);
+$gallery = $entity->getSingleFor($entity->parameters, 'Gallery');
+$gallery = new \Black\Entity\Decorator($gallery);
+$images = $entity->getMultipleFor($gallery->unserialize('images'), 'File');
+
+
+if (!empty($images)):
+    //echo "<h3>{$gallery->title}</h3>";
+
+    echo "<div id='homepage-images' class='flexslider'>
+            <ul class='slides'>";
+foreach ($images as $k => $v):
+
+    echo "<li>
+            <img src='{$v->path}' alt='' width='150' />
+
+            <p class='flex-caption'>
+                {$v->title}: {$v->comments}
+            </p>
+          </li>";
+
+endforeach;
+    echo <<<HTML
+    </ul>
+</div>
+
+<style type='text/css'>
+  @import url('/Assets/css/flex-slider/flex-slider.css');
+</style>
+<script defer src="/Assets/js/flex-slider/jquery.flexslider-min.js"></script>
+
+  <script type="text/javascript">
+
+    $(window).load(function(){
+      $('.flexslider').flexslider({
+        animation: "slide",
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+    });
+  </script>
+
+
+HTML;
+endif;

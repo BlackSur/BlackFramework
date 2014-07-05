@@ -1,0 +1,52 @@
+    <?php
+$options = '';
+$elementMultiple = 'multiple';
+if (!empty($elementOptions) && is_array($elementOptions)) {
+    foreach ($elementOptions as $key => $value) {
+        $selected = '';
+        if (is_array($elementValue) && in_array($key, $elementValue)) {
+            $selected = "selected='selected'";
+        } else if (is_string($elementValue) && $elementValue == $key) {
+            $selected = "selected='selected'";
+        }
+
+        $options .= "<option value='{$key}' {$selected} data-img-src='{$value}'>{$value}</option>";
+    }
+}
+
+$html = <<<HTML
+<div class="form-group">
+    <label for="{$elementId}">{$labelText}</label>
+    <select $elementMultiple
+        type="{$elementType}"
+        name="{$elementName}[]"
+        class="form-control image-picker masonry {$elementClass}"
+        id="{$elementId}"
+        placeholder="{$elementPlaceHolder}"
+    >
+    {$options}
+    </select>
+</div>
+
+<style type="text/css">
+  @import url("/Assets/css/image-picker/image-picker.css");
+</style>
+
+<script src="/Assets/js/image-picker/image-picker.min.js"></script>
+<script src="/Assets/js/image-picker/jquery.masonry.min.js"></script>
+<script>
+$( document ).ready(function() {
+    $("select.image-picker").imagepicker();
+   var container =  $("select.image-picker.masonry").next("ul.thumbnails");
+        container.imagesLoaded(function(){
+        container.masonry({
+        itemSelector:   "li",
+      });
+    });
+
+});
+</script>
+
+HTML;
+
+return $html;

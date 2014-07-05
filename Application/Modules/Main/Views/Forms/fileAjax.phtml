@@ -1,0 +1,44 @@
+<?php
+$evaluatedEntity = $this->getEntity();
+if (!empty($evaluatedEntity) && method_exists($evaluatedEntity, 'getAjaxUploadConfigurations')):
+  $ajaxConfigs = $this->getEntity()->getAjaxUploadConfigurations();
+echo "<script>";
+  foreach ($ajaxConfigs as $key => $value):
+    echo "var {$key} = \"{$value}\";";
+  endforeach;
+echo "</script>";
+endif;
+
+
+
+$currentImage = (!empty($elementValue))
+    ? "<img src='{$elementValue}' alt='' id='selectedImage' />"
+    : "<img src='/Assets/images/placeholder.png' alt='' id='selectedImage' />";
+$html = <<<HTML
+<div class="form-group">
+  <div class="ajaxUploadLeft">
+    <div id="drop">
+        <img class="icono-drag-drop" src='/Assets/images/icono_dragDrop.png' alt=''  /><br>
+        Arrastre aqui <a>{$labelText}</a>
+    <input
+        type="file"
+        name="{$elementName}"
+        id="{$elementId}"
+        value="{$elementValue}"
+         />
+    <input type="hidden" name="{$elementName}" id="{$elementId}" value="{$elementValue}" />
+    </div>
+
+    <ul id="progress">
+        <!-- The file uploads will be shown here -->
+    </ul>
+  </div>
+  <div class="ajaxUploadRight">
+     {$currentImage}
+  </div>
+</div>
+
+
+HTML;
+// TO ALLOW MULTIPLE FILES, add 'multiple' to the input
+return $html;
